@@ -1,0 +1,26 @@
+﻿@inject IContactService contactService
+
+<h3>EditContact</h3>
+<EditForm Model="editContact" OnValidSubmit="HandleValidSubmit">
+    <label for="firstname">FirstName:</label>
+    <input class="form-control" id="firstname" @bind="editContact.FirstName" />
+    <br />
+    <label for="lastname">LastName:</label>
+    <input class="form-control" id="lastname" @bind="editContact.LastName" />
+    <br />
+    <label for="email">Email:</label>
+    <InputText class="form-control" id="email" @bind-Value="editContact.Email" />
+    <br />
+    <button type="submit" class="btn-success">Update Contact</button>
+
+</EditForm>
+@code {
+    [Parameter]
+    public Contact editContact { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        await contactService.UpdateContactAsync(editContact);
+    }
+
+}

@@ -1,0 +1,40 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">BlazorServerAppDemo</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Contacts
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="addcontact">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Add Contact
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editContact">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Edit Contacts
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="samplejavascript">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> IJS Tutorial
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="timer">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Timer in Blazor
+            </NavLink>
+        </div>
+    </nav>
+</div>
+

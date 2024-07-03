@@ -1,0 +1,16 @@
+﻿@page "/"
+@using BlazorServerAppDemo.Components.Pages.ContactComponents
+
+<ContactList @ref="contactList">
+
+    <NullContact>
+        <span>Contacts are loading</span><br />
+    </NullContact>
+
+    <ZeroContact>
+        <span>No Contacts to displaty</span>
+    </ZeroContact>
+
+</ContactList>
+
+<button @onclick="HideContact">Hide Contacts</button>

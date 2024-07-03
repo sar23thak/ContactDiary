@@ -1,0 +1,59 @@
+# .NET
+*.dll
+*.exe
+*.pdb
+*.runtimeconfig.json
+*.runtimeconfig.dev.json
+*.deps.json
+*.db
+*.log
+*.params.txt
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono Auto Generated)
+mono_crash.*
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+.history/
+
+# Visual Studio directories
+.vs/
+
+# Include if you have a publishing profile
+# PublishProfiles/
+
+# Others
+node_modules/

@@ -1,0 +1,62 @@
+﻿@page "/addcontact"
+@using BlazorServerAppDemo.Data
+
+@inject DataContext DataContext
+@inject IContactService contactService
+<h3>Add Contact</h3>
+
+@* <input placeholder="FirstName" @bind = "firstname"/><br />
+<input placeholder="LastName" @bind = "lastname"/><br />
+<input placeholder="Email" @bind="email"/><br />
+<button @onclick="AddContact">Add Contact</button><br /> *@
+
+<EditForm Model="newContact" OnValidSubmit="HandleValidSubmit">
+    <label for="firstname">FirstName:</label>
+    <input class="form-control" id="firstname" @bind="newContact.FirstName" />
+    <br />
+    <label for="lastname">LastName:</label>
+    <input class="form-control" id="lastname" @bind="newContact.LastName"/>
+    <br />
+    <label for="email">Email:</label>
+    <InputText class="form-control" id="email" @bind-Value="newContact.Email" />
+    <br />
+    <button type="submit" class="btn-success">Add Contact</button>
+
+</EditForm>
+<br />
+@* @if (contactService.GetContacts().Count() == 0)
+{
+    <span>Newly Added Contact will display here.</span>
+}
+else
+{
+    foreach(var contact in contactService.GetContacts())
+    {
+        <b>@contact.FirstName @contact.LastName</b><br />
+        <u>@contact.Email</u><br />
+    }
+} *@
+
+
+
+@code {
+    // private string firstname, lastname, email;
+
+    // private async void AddContact()
+    // {
+    //     var newContact = new Contact
+    //         {
+    //             FirstName = firstname,
+    //             LastName = lastname,
+    //             Email = email
+    //         };
+    //     await contactService.AddContactAsync(newContact);
+    // }
+    private Contact newContact = new Contact();
+
+    private async Task HandleValidSubmit()
+    {
+        await contactService.AddContactAsync(newContact);
+    }
+
+}

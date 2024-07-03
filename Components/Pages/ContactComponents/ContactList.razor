@@ -1,0 +1,68 @@
+﻿@using BlazorServerAppDemo.Components.Layout
+@inject IContactService contactService
+@inject NavigationManager navmanager
+
+<input type="checkbox" @bind="@DisplayEmail" /><label>Display Email</label><br />
+
+@if (displayContacts)
+{
+    @if (contacts is null)
+    {
+        @NullContact
+    }
+    else if (contacts.Count == 0)
+    {
+        @ZeroContact
+    }
+    else
+    {
+        @foreach (var contact in contacts)
+        {
+            <ContactComponent01 CurrentContact="contact" DisplayEmail="DisplayEmail" DeleteContact="ShowingModal"></ContactComponent01>
+        }
+    }
+}
+<DeleteConfirmation @ref="deleteConfirmation" OnCofirmed="OnDeleteConfirmed"></DeleteConfirmation>
+
+@code{
+    [Inject]
+    IJSRuntime jsRuntime { get; set; }
+    private bool DisplayEmail = false;
+
+    private bool displayContacts = true;
+
+    private DeleteConfirmation deleteConfirmation;
+
+    [Parameter]
+    public RenderFragment NullContact { get; set; }
+    [Parameter]
+    public RenderFragment ZeroContact { get; set; }
+
+
+    private async Task ShowingModal(Contact contact)
+    {
+        deleteConfirmation.bodycontent = $"Do you really want to delete {contact.FirstName} {contact.LastName} from the list?";
+        deleteConfirmation.ContactToBeDelete = contact;
+        deleteConfirmation.ShowModal();
+
+    }
+    private async Task OnDeleteConfirmed(Contact contact)
+    {
+        contactService.DeleteContactAsync(contact);
+        deleteConfirmation.HideModal();
+        navmanager.NavigateTo("/", forceLoad: true);
+    }
+
+    public List<Contact> contacts;
+    protected async override Task OnInitializedAsync()
+    {
+        contacts = await contactService.GetContactsAsync();
+    }
+
+    public void ShowContacts(){
+        displayContacts = true;
+    }
+    public void HideContacts(){
+        displayContacts = false;
+    }
+}

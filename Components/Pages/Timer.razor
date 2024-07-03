@@ -1,0 +1,27 @@
+﻿@page "/timer"
+@using System.Timers;
+<span>Timer feature is used to display the dynamic DateTime</span>
+<b>@CurrentTime</b>
+
+@code {
+    private System.Timers.Timer timer;
+    private string CurrentTime;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        CurrentTime = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+        timer = new System.Timers.Timer();
+        timer.Interval = 1000;
+        timer.Enabled = true;
+        timer.Elapsed += onTimerElapsed;
+
+
+    }
+    private void onTimerElapsed(object? s, ElapsedEventArgs e)
+    {
+        CurrentTime = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+        InvokeAsync(StateHasChanged);
+
+    }
+
+}

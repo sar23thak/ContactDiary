@@ -1,0 +1,56 @@
+﻿<p>
+    <span style="color: @NameColor"><b>Name:</b> @CurrentContact.FirstName @CurrentContact.LastName</span><br />
+    @if (DisplayEmail)
+    {
+        <span style="color: @EmailColor"><b>Email:</b> @CurrentContact.Email</span>
+
+        <br />
+    }
+    @if (showinfo)
+    {
+        <span>The Email of @CurrentContact.FirstName is @CurrentContact.Email</span><br />
+    }
+    <button @onclick="InfoButton">@InfoBtn</button>
+    <button @onclick="(()=>{isediting=true;})">Edit</button>
+    <button @onclick="@(()=>{DeleteContact.InvokeAsync(CurrentContact);})">Delete</button>
+</p>
+
+@if (isediting)
+{
+    <EditContact editContact="CurrentContact"></EditContact>
+}
+<br />
+
+@code{
+    [CascadingParameter(Name = "namecolor")]
+    public string NameColor { get; set; }
+
+    [CascadingParameter(Name = "nametestcolor")]
+    public string EmailColor{ get; set; }
+
+    [Parameter]
+    public Contact CurrentContact{ get; set; }
+
+    private bool showinfo = false;
+    private string InfoBtn = "show info";
+    private void InfoButton()
+    {
+        showinfo = !showinfo;
+        if(showinfo == true)
+        {
+            InfoBtn = "hide info";
+        }
+        else
+        {
+            InfoBtn = "show info";
+        }
+    }
+
+    private bool isediting = false;
+
+    [Parameter]
+    public bool DisplayEmail{ get; set; }
+    [Parameter]
+    public EventCallback<Contact>DeleteContact{ get; set; }
+
+}

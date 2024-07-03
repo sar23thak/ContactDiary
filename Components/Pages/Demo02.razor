@@ -1,0 +1,28 @@
+﻿@page "/editContact"
+@inject IContactService contactService
+
+<p>The edit functionality is yet to be implemented!</p>
+@if ( contacts is null)
+{
+    <span>No Contacts to display</span>
+}
+else if (contacts.Count == 0)
+{
+    <span>no contacts fetched!</span>
+}
+else
+{
+    @foreach (var contact in contacts)
+    {
+        <b>@contact.FirstName @contact.LastName</b>
+        <i>@contact.Email</i>
+    }
+}
+<h3>Demo02</h3>
+
+@code{
+    public List<Contact>contacts;
+    protected async override Task OnInitializedAsync(){
+        contacts = await contactService.GetContactsAsync();
+    }
+}
